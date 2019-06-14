@@ -1,8 +1,23 @@
 # Açık Seçim
 Projeyi çalıştırmadan önce AcikSecim/AcikSecim.WebApi/Models/WebApiDbContext.cs sınıfı içerisinde yer alan database konfigurasyonunu kendi userID ve password değerleriniz ile değiştirin
 
-Sonrasında Nuget Package Manager Console içerisinde "update database" komutunu çalıştırmanız yeterlidir.
+Sonrasında Nuget Package Manager Console içerisinde "update database" komutunu çalıştırmanız yeterlidir
 
+Postgresql kuralım öncelikle, terminalimize aşağıdaki komutu yazıyoruz;
+		
+		docker run --name postg -e POSTGRES_PASSWORD=123456 -d postgres 
+
+Sonrasında ise oluşan postgresql containerimizin yerel ip adresi ile api-client içerisindeki ip adresi ile aynı mı diye aşağıdaki komut ile kontrol ediyoruz;
+
+		docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postg
+ 
+Eğer sonuç 172.17.0.2 ise direkt olarak client build alma kısmına geçebilirsiniz.
+
+Sonuç 172.17.0.2 değilse;  AcikSecim.WebApi/Models/WebApiDbContext.cs içerisindeki
+
+		"User ID=postgres; Password=123456; Server=172.17.0.2; Port=5432; Database=AcikSecimDB; Integrated Security=true;");
+
+Server = 172.17.0.2 olan IP adresini docker inspect komutundan aldığımız cevapla değiştiriyoruz. Artık build almaya hazırız.
 
 AcikSecim.WebApi klasörünün içerisinden 
 
