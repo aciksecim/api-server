@@ -29,7 +29,7 @@ AcikSecim.WebApi klasörünün içerisinden
 
  komutuyla konteyner daemonize olarak çalışacaktır. 
 
- #Varolan konteynerı güncellemek
+ # Varolan konteynerı güncellemek
  
  Kaynak kodları üzerinde düzenleme yaptıysanız ve **değişiklikler github reposuna yansıdıysa** aşağıdaki kodla oluşturduğunuz konteyneri silip üstteki adımları takip etmeniz yeterlidir.
  
@@ -51,7 +51,7 @@ yeni imaj oluşturuyoruz.
 
 yazarak konteynerimizin güncel halini görebiliriz.
 
-##Konteyner loglarını görüntülemek
+# Konteyner loglarını görüntülemek
 
 	docker container logs postg
 
