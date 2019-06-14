@@ -25,6 +25,38 @@ AcikSecim.WebApi klasörünün içerisinden
  
  komutuyla "aspnetapp" docker image oluşacaktır. Yine aynı şekilde
  
- 	docker run -d -p 80:80 aspnetapp:latest
+ 	docker run --name aspapi -d -p 80:80 aspnetapp:latest
 
  komutuyla konteyner daemonize olarak çalışacaktır. 
+
+ #Varolan konteynerı güncellemek
+ 
+ Kaynak kodları üzerinde düzenleme yaptıysanız ve **değişiklikler github reposuna yansıdıysa** aşağıdaki kodla oluşturduğunuz konteyneri silip üstteki adımları takip etmeniz yeterlidir.
+ 
+ 	docker container rm aspapi
+	
+**Kaynak kodundaki değişikliker henüz sadece yerelde değiştiyse**
+
+Üsttekinden tek farklı olarak clone yapmadan build almanızdır, şu şekilde;
+
+ 	docker container rm aspapi
+
+ile konteynerimizi siliyoruz ve AcikSecim.WebApi klasörünün içerisine girip
+
+ 	docker build -t aspnetapp .
+
+yeni imaj oluşturuyoruz. 
+
+ 	docker run --name aspapi -d -p 80:80 aspnetapp:latest
+
+yazarak konteynerimizin güncel halini görebiliriz.
+
+##Konteyner loglarını görüntülemek
+
+	docker container logs postg
+
+komutu ile postgresql konteynerının logları,
+
+	docker container logs aspapi
+
+komutu ile asp.net api konteynerimizin loglarını görüntüleyebiliriz.
