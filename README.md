@@ -5,7 +5,7 @@ Sonrasında Nuget Package Manager Console içerisinde "update database" komutunu
 
 Postgresql kuralım öncelikle, terminalimize aşağıdaki komutu yazıyoruz;
 		
-		docker run --name postg -e POSTGRES_PASSWORD=123456 -d postgres 
+		 docker run -p 5432:5432 --name postg -e POSTGRES_PASSWORD=123456 -d postgres
 
 Sonrasında ise oluşan postgresql containerimizin yerel ip adresi ile api-client içerisindeki ip adresi ile aynı mı diye aşağıdaki komut ile kontrol ediyoruz;
 
