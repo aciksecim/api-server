@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.3 (Debian 11.3-1.pgdg90+1)
--- Dumped by pg_dump version 11.3 (Debian 11.3-1.pgdg90+1)
+-- Dumped from database version 11.3
+-- Dumped by pg_dump version 11.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -28,9 +28,9 @@ CREATE TABLE public."Adaylar" (
     "Id" integer NOT NULL,
     "Ad" character varying(50),
     "Ad2" character varying(50),
-    "Soyad" bytea,
     "Partisi" character varying(50),
-    "Ittifaki" character varying(50)
+    "Ittifaki" character varying(50),
+    "Soyad" character varying(50)
 );
 
 
@@ -403,6 +403,18 @@ ALTER SEQUENCE public."Tutanaklar_Id_seq" OWNED BY public."Tutanaklar"."Id";
 
 
 --
+-- Name: __EFMigrationsHistory; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public."__EFMigrationsHistory" OWNER TO postgres;
+
+--
 -- Name: Adaylar Id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -476,7 +488,8 @@ ALTER TABLE ONLY public."Tutanaklar" ALTER COLUMN "Id" SET DEFAULT nextval('publ
 -- Data for Name: Adaylar; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Adaylar" ("Id", "Ad", "Ad2", "Soyad", "Partisi", "Ittifaki") FROM stdin;
+COPY public."Adaylar" ("Id", "Ad", "Ad2", "Partisi", "Ittifaki", "Soyad") FROM stdin;
+1	Mikail	Deneme	AKP	Milli	Tekin
 \.
 
 
@@ -561,10 +574,18 @@ COPY public."Tutanaklar" ("Id", "SandikId", "KullaniciId", "Resim", "GonderilmeT
 
 
 --
+-- Data for Name: __EFMigrationsHistory; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") FROM stdin;
+\.
+
+
+--
 -- Name: Adaylar_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Adaylar_Id_seq"', 1, false);
+SELECT pg_catalog.setval('public."Adaylar_Id_seq"', 1, true);
 
 
 --
@@ -628,6 +649,14 @@ SELECT pg_catalog.setval('public."Sonuclar_Id_seq"', 1, false);
 --
 
 SELECT pg_catalog.setval('public."Tutanaklar_Id_seq"', 1, false);
+
+
+--
+-- Name: __EFMigrationsHistory PK___EFMigrationsHistory; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."__EFMigrationsHistory"
+    ADD CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId");
 
 
 --
