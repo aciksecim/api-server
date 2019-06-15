@@ -60,3 +60,13 @@ komutu ile postgresql konteynerının logları,
 	docker container logs aspapi
 
 komutu ile asp.net api konteynerimizin loglarını görüntüleyebiliriz.
+
+# Docker konteynerı içerisine veritabanı yapısını yüklemek
+
+DBYapisi klasörüne girip aşağıdaki komutu terminalimizden işliyoruz.
+
+	docker cp Backup postg:/
+
+Sonrasında aşağıdaki komutu da girersek veritabanı yapımız sisteme işlenmiş olacaktır.
+
+	docker exec postg psql -U postgres -d AcikSecimDB -1 -f Backup
