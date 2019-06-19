@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AcikSecim.WebApi.Models;
+using AcikSecim.WebApi.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AcikSecim.WebApi.Controllers
 {
@@ -12,43 +19,65 @@ namespace AcikSecim.WebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private WebApiDbContext _apiDbContext;
-        public ValuesController()
+        private AcikSecimDBContext _apiDbContext;
+        private IConfiguration _configuration;
+        public ValuesController(IConfiguration configuration)
         {
-            _apiDbContext = new WebApiDbContext();
+            _configuration = configuration;
+            _apiDbContext = new AcikSecimDBContext();
         }
-        // GET api/values
+
         [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
+        [Route("adaylariGetir")]
+        public ActionResult<IEnumerable<Adaylar>> Get()
         {
-            List<User> users = _apiDbContext.Users.ToList();
-
-            return users;
+            List<Adaylar> adaylarListesi = _apiDbContext.Adaylar.ToList();
+            return adaylarListesi;
         }
+     
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("yeniKullaniciEkle")]
+        public ActionResult KullaniciKayit([FromBody] Kullanicilar yeniKullanici)
         {
+            _apiDbContext.Kullanicilar.Add(yeniKullanici);
+            _apiDbContext.SaveChanges();
+
+            return Ok();
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [Route("login")]
+        public ActionResult Giris([FromBody] GirisDto kullanici)
         {
+            var user = _apiDbContext.Kullanicilar.FirstOrDefault(k => k.Ad == kullanici.Adi || k.Soyad == kullanici.Soyadi);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration.GetSection("Appsettings:Token").Value);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Name, user.Ad),
+                    new Claim(ClaimTypes.Surname, user.Soyad)
+                }),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha512Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return Ok(tokenString);
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
     }
 }
