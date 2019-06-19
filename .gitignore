@@ -1,3 +1,6 @@
+# Custom
+appsetting.json
+
 *.swp
 *.*~
 project.lock.json
