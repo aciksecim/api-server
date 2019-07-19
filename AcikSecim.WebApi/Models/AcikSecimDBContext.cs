@@ -23,7 +23,7 @@ namespace AcikSecim.WebApi.Models
         {
             // localhost
 
-            // optionsBuilder.UseNpgsql("User ID=postgres; Password=1045246; Server=localhost; Port=5432; Database=AcikSecimDB; Integrated Security=true;");
+           //optionsBuilder.UseNpgsql("User ID=postgres; Password=1045246; Server=localhost; Port=5432; Database=AcikSecimDB; Integrated Security=true;");
 
             optionsBuilder.UseNpgsql("User ID=postgres; Password=123456; Server=172.17.0.2; Port=5432; Database=AcikSecimDB; Integrated Security=true;");
         }

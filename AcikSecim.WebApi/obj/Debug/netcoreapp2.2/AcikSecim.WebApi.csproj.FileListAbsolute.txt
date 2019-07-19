@@ -40,3 +40,17 @@ F:\Source\Repos\Github\api-server\AcikSecim.WebApi\bin\Debug\netcoreapp2.2\AcikS
 F:\Source\Repos\Github\api-server\AcikSecim.WebApi\bin\Debug\netcoreapp2.2\AcikSecim.WebApi.dll
 F:\Source\Repos\Github\api-server\AcikSecim.WebApi\bin\Debug\netcoreapp2.2\AcikSecim.WebApi.pdb
 F:\Source\Repos\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.RazorTargetAssemblyInfo.cache
+D:\Github\api-server\AcikSecim.WebApi\bin\Debug\netcoreapp2.2\AcikSecim.WebApi.deps.json
+D:\Github\api-server\AcikSecim.WebApi\bin\Debug\netcoreapp2.2\AcikSecim.WebApi.runtimeconfig.json
+D:\Github\api-server\AcikSecim.WebApi\bin\Debug\netcoreapp2.2\AcikSecim.WebApi.runtimeconfig.dev.json
+D:\Github\api-server\AcikSecim.WebApi\bin\Debug\netcoreapp2.2\AcikSecim.WebApi.dll
+D:\Github\api-server\AcikSecim.WebApi\bin\Debug\netcoreapp2.2\AcikSecim.WebApi.pdb
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.csprojAssemblyReference.cache
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.csproj.CoreCompileInputs.cache
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.RazorAssemblyInfo.cache
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.RazorAssemblyInfo.cs
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.AssemblyInfoInputs.cache
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.AssemblyInfo.cs
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.RazorTargetAssemblyInfo.cache
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.dll
+D:\Github\api-server\AcikSecim.WebApi\obj\Debug\netcoreapp2.2\AcikSecim.WebApi.pdb
