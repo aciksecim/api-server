@@ -5,6 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AcikSecim.WebApi.Models;
+using AcikSecim.WebApi.Services.Authentication;
+using AcikSecim.WebApi.Services.Candidate;
+using AcikSecim.WebApi.Services.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,13 +39,18 @@ namespace AcikSecim.WebApi
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Appsettings:Token").Value);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //implementation of dependency injection
+            services.AddScoped<IAuth, AuthService>(); //the same within a request, but different across different requests
+            services.AddSingleton<ICandidate, CandidateService>(); 
+            services.AddSingleton<IUser, UserService>();
+
             //JWT Token Konfigurasyonu
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey =  new SymmetricSecurityKey(key),
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -68,7 +76,7 @@ namespace AcikSecim.WebApi
             }
             using (var apiContext = new AcikSecimDBContext())
             {
-               // apiContext.Database.Migrate();
+                apiContext.Database.Migrate();
             }
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
